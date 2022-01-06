@@ -16,6 +16,13 @@ namespace WebApplication6
 
         public DbSet<Category> Categories { get; set; }
         public DbSet<Product> Products { get; set; }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<Category>()
+                .ToView(nameof(Categories))
+                .HasKey(t => t.Id);
+        }
     }
 
     public class Category
